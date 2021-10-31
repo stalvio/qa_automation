@@ -18,5 +18,4 @@ public class CategoryPage extends BasePage {
     public WebElement getCategoryItemByName(String categoryName) {
         return categoryItems.stream().filter(item -> item.getText().contains(categoryName)).findFirst().get();
     }
-
 }

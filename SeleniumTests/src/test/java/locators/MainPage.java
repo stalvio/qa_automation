@@ -45,5 +45,4 @@ public class MainPage extends BasePage {
         cartIcon.click();
         return new CartPage(driver);
     }
-
 }

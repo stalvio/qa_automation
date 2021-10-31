@@ -32,6 +32,4 @@ public class Header extends BasePage {
     public boolean isUserLogged() {
         return myPromIcon.isDisplayed();
     }
-
-
 }

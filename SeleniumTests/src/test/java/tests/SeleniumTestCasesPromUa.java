@@ -102,7 +102,6 @@ public class SeleniumTestCasesPromUa {
             }
         });
         registrationPage.registryUser(user);
-
     }
 
     @Test
