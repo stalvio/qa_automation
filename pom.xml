@@ -98,7 +98,7 @@
                 <version>${maven-surefire-plugin-version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>final-test-framework/TestNG.xml</suiteXmlFile>
+                        <suiteXmlFile>TestNG.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
