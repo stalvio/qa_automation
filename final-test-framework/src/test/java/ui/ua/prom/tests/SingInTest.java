@@ -20,7 +20,8 @@ public class SingInTest extends SingInBaseTest {
     private final User userWithInvalidEmailFormat = new User("stal", "");
 
 
-    @Test(suiteName = "PageAccessibility", description = "Login page is open after clicking login-icon in Header")
+    @Test(description = "Login page is open after clicking login-icon in Header",
+            suiteName = "PageAccessibility")
     public void loginPageAccessibleFromHeader() {
 
         Assert.assertTrue(isSignInPageOpen());

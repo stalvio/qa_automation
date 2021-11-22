@@ -13,6 +13,8 @@ public class BaseTest {
     public static void setup() {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com";
         RestAssured.requestSpecification = given().contentType("application/json");
+        given().contentType("application/json")
+                .accept("application/json");
     }
 
     @BeforeEach

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
+import static ui.ua.prom.pages.MainPage.getListingBanner;
 
 public class SearchField {
 
@@ -13,12 +14,12 @@ public class SearchField {
 
     static By searchResults = By.cssSelector("._1NEkz ._1tCLn");
 
+
     public static boolean isItemsPickListDisplayed() {
         return $(itemsPickList).isDisplayed();
     }
 
     public static void typeSearchRequest(String request) {
-
         $(searchField).should(Condition.visible).sendKeys(request);
         $(submitButton).should(Condition.enabled);
     }
@@ -26,6 +27,7 @@ public class SearchField {
     public static void submitSearchRequest(String request) {
         typeSearchRequest(request);
         $(submitButton).should(Condition.visible).click();
+        getListingBanner().shouldBe(Condition.visible);
     }
 
     public static boolean isPickListResultsRelevantToRequest(String request) {

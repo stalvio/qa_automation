@@ -4,18 +4,19 @@ import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import ui.ua.prom.models.User;
+import ui.ua.prom.pages.common_modules.Header;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class SingInPage {
 
     static public By singInPage = By.cssSelector("._2tyTS._2X5s5");
-    static By emailButton = By.cssSelector("div[data-qaid=email_btn");
+    static By emailButton = By.cssSelector("div[data-qaid=email_btn]");
     static By emailInputField = By.id("email_field");
     static By emailSubmitButton = By.id("emailConfirmButton");
     static By passwordInputField = By.id("enterPassword");
     static By passwordSubmitButton = By.id("enterPasswordConfirmButton");
-    static By emailIsNotRegisteredMessage = By.cssSelector("span[data-qaid=error_field");
+    static By emailIsNotRegisteredMessage = By.cssSelector("span[data-qaid=error_field]");
 
     public static boolean isSignInPageOpen() {
         return $(singInPage).isDisplayed();

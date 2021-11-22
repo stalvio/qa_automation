@@ -1,11 +1,13 @@
 package ui.ua.prom.tests;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.*;
 import ui.ua.prom.pages.AppConfig;
 import ui.ua.prom.utils.Driver;
 
 import static com.codeborne.selenide.Selenide.*;
+import static ui.ua.prom.pages.MainPage.*;
 
 public class BaseTest {
 
