@@ -3,9 +3,9 @@
 <suite name="AllTests">
     <test name="Test">
         <classes>
-            <class name="ui.ua.prom.tests.MainPageTests"/>
+            <class name="final-test-framework.MainPageTests"/>
             <class name="ui.ua.prom.tests.SingInTest"/>
-            <class name="api.com.restful_booker.tests.RestfulBookerApiTests"/>
+            <class name="api.com.restful_booker.tests.HappyPathApiTests"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

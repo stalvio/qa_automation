@@ -5,7 +5,8 @@
         <classes>
             <class name="ui.ua.prom.tests.MainPageTests"/>
             <class name="ui.ua.prom.tests.SingInTest"/>
-            <class name="api.com.restful_booker.tests.RestfulBookerApiTests"/>
+            <class name="api.com.restful_booker.tests.HappyPathApiTests"/>
+            <class name="api.com.restful_booker.tests.SadPathApiTests"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
