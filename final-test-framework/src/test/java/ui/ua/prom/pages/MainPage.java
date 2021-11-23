@@ -1,7 +1,6 @@
 package ui.ua.prom.pages;
 
 import com.codeborne.selenide.*;
-import com.codeborne.selenide.selector.WithText;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
@@ -10,10 +9,10 @@ import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.*;
 import static ui.ua.prom.pages.CartPage.*;
+import static ui.ua.prom.pages.SingleItemPage.waitForSingleItemPageToLoad;
 
 public class MainPage {
 
-    static By sortByScoreButton = By.cssSelector("span[data-qaid=sort_by_-score]");
     static By sortByLowerPriceButton = By.cssSelector("span[data-qaid=sort_by_price]");
     static By sortByHigherPriceButton = By.cssSelector("span[data-qaid=sort_by_-price]");
 
@@ -72,6 +71,7 @@ public class MainPage {
         setTopPrice(topPrice);
         $(acceptPriceButton).shouldBe(Condition.enabled).click();
         getListingBanner().shouldBe(Condition.visible);
+
     }
 
     @Step("Set the item's lowest price to display")
@@ -91,6 +91,7 @@ public class MainPage {
 
     @Step("The last item is the list is returned")
     public static Double getLastItemPrice() {
+        Double d = Double.parseDouble($$(itemsPriceList).last().getAttribute("data-qaprice"));
         return Double.parseDouble($$(itemsPriceList).last().getAttribute("data-qaprice"));
     }
 
@@ -100,20 +101,20 @@ public class MainPage {
 
         Integer listSize = $$(itemList).size();
 
-        for(int i=0; i < numberOfItems; i++) {
+        for (int i = 0; i < numberOfItems; i++) {
             Integer index = getRandomIndex(listSize);
 
-            while(selectedIndexes.contains(index)) {
+            while (selectedIndexes.contains(index)) {
                 index = getRandomIndex(listSize);
             }
 
-            if(cartPageOpen()) {
+            if (cartPageOpen()) {
                 $$(itemList).get(index).$("a[data-qaid=buy-button]").should(Condition.visible).doubleClick();
-            }else {
+            } else {
                 $$(itemList).get(index).$("a[data-qaid=buy-button]").should(Condition.visible).click();
             }
             waitForCartPageToOpen();
-            CartPage.closeCartIfOpen(); 
+            CartPage.closeCartIfOpen();
             selectedIndexes.add(index);
         }
     }
@@ -127,9 +128,16 @@ public class MainPage {
         CartPage.closeCartIfOpen();
     }
 
+    public static void openRandomSingleItemFromList() {
+        Integer randomIndex = getRandomIndex($$(itemList).size());
+        $(listingBanner).shouldBe(Condition.visible);
+        $$(itemList).get(randomIndex).$("a[data-qaid=product_link]").click();
+        waitForSingleItemPageToLoad();
+    }
+
     @Step("Multiple {names} items are added to Cart")
     public static void addMultipleItemsByNames(String[] names) {
-        for(String name: names)
+        for (String name : names)
             addSingleItemByName(name);
     }
 
@@ -139,7 +147,7 @@ public class MainPage {
     }
 
     @Step("Get random item index")
-    private static Integer getRandomIndex(Integer listSize) {
+    public static Integer getRandomIndex(Integer listSize) {
         Random random = new Random();
         return random.nextInt(listSize);
     }

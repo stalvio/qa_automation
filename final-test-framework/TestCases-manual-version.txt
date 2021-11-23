@@ -1,0 +1,166 @@
+Sing-In Suite
+
+Test-case: loginPageAccessibleFromHeader() 
+Summary: Login page is open after clicking login-icon in Header
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. Click login-icon in the Header menu
+
+Expected: login pop-up is displayed
+
+***
+
+Test-case: registeredUserCanSingIn() 
+Summary: User can sing-in using valid email and password
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. Click login-icon in the Header menu
+2. Click "email" login button
+3. Submit registered email 
+4. Submit valid password  
+
+Expected: 
+- Sing-in pop-up is closed
+- "My Prom" icon is displayed instead of "login" icon
+
+***
+
+Test-case: registeredUserCanSingIn()
+Summary: User can't sing-in using unregistered email
+
+Pre-condition:
+- user is on the Main page
+- user is not logged
+
+Steps:
+1. Click login-icon in the Header menu
+2. Click "email" login button
+3. Submit unregistered email adress
+
+Expected: 
+- "email is not registered" error message is displayed
+- user is not logged
+
+***
+
+Test-case: noSingInWithInvalidPassword()
+Summary: User can not sing-in using valid email with invalid password
+
+Pre-condition:
+- user is on the Main page
+- user is not logged
+
+Steps:
+1. Click login-icon in the Header menu
+2. Click "email" login button
+3. Submit valid email adress
+4. Submit invalid password
+
+Expected: 
+- "wrong user credentials" error message is displayed
+- user is not logged
+
+***
+
+Test-case: noSingInWithInvalidEmailFormat()
+Summary: User can't sing-in when using invalid email format
+
+Pre-condition:
+- user is on the Main page
+- user is not logged
+
+Steps:
+1. Click login-icon in the Header menu
+2. Click "email" login button
+3. Submit wring-format email adress(example "111")
+
+Expected: 
+- "wrong email format" error message is displayed
+- user is not logged
+
+-----------------------------------------------------
+
+Main-Page Suite
+
+Test-case: pickListContainsRelevantItems(String request)
+Summary: Search field's pick-list contains relevant to the request search results
+
+Test Scope:
+- "штор"
+- "ламп"
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field type the request from the Test Scope
+
+Expected: 
+- search filed's pick list contains relevant search results that contain request input in its names
+
+***
+
+Test-case: itemsCanBeSortedByPriceFromLowToHigh(String request)
+Summary: Searched items can be sorted by price from lower to higher 
+
+Test Scope:
+- "штор"
+- "ламп"
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field submit the request from the Test Scope
+2. Click "Дешевле" in the left sorting menu
+
+Expected: 
+- items are sorted by price, from lower to higher ones
+
+***
+
+Test-case: itemsCanBeSortedByPriceFromHighToLow(String request)
+Summary: Searched items can be sorted by price from higher to lower 
+
+Test Scope:
+- "штор"
+- "ламп"
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field submit the request from the Test Scope
+2. Click "Дороже" button in the left sorting menu
+
+Expected: 
+- items are sorted by price, from higer to lower ones
+
+***
+
+Test-case: userCanSetPriceRange(String bottomPrice, String topPrice)
+Summary: User can set the price range using filter options 
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field submit the following request "футболк"
+2. Click "Дороже" button in the left sorting menu
+3. In "Диапазон цен, грн" set the lower price as 400 грн
+4. Set the top price as 800 грн
+5. Click "Ok" button
+
+Expected: The page contains only items wich price is more than 400 and less than 800 грн
+
+***
+
+ 
+
+

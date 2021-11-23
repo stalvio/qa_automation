@@ -51,7 +51,7 @@ public class HappyPathApiTests extends BaseTest {
 
     @Description("Verify that all the returned, from 'getBookingIds' GET request, ids are valid")
     @Test
-    public void getBookingIdsResponseContainsOnlyValidIds() {
+    public void allBookingIdsInResponseAreValid() {
 
          response = given().
                 when().

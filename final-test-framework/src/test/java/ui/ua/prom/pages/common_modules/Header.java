@@ -3,6 +3,7 @@ package ui.ua.prom.pages.common_modules;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.selector.WithText;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import ui.ua.prom.pages.CartPage;
 
@@ -19,28 +20,29 @@ public class Header {
     static By cartCounter = By.cssSelector("[data-qaid=counter]");
     static By myPromMenu = By.cssSelector("div[data-placement=bottom-end]");
 
+    @Step("Open Sing-in page")
     public static void openSingInPage() {
         $(singInIcon).click();
     }
 
-    public static void openSingUpPage() {
-        $(singUpIcon).click();
-    }
-
+    @Step("Check if user is logged")
     public static boolean isUserLogged() {
         $(singInPage).should(Condition.disappear);
         return $(myPromIcon).isDisplayed();
     }
 
+    @Step("Open Cart")
     public static void openCart() {
         $(cartIcon).shouldBe(Condition.visible).click();
         CartPage.waitForCartPageToOpen();
     }
 
+    @Step("Get the number of items in Cart")
     public static Integer getNumberOfItemInCart() {
         return Integer.valueOf($(cartCounter).shouldBe(Condition.visible).getText());
     }
 
+    @Step("Log out")
     public static void logOut() {
         $(myPromIcon).hover();
         $(myPromMenu).shouldBe(Condition.visible);

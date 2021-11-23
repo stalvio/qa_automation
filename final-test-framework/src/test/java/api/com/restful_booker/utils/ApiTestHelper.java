@@ -28,5 +28,4 @@ public class ApiTestHelper {
                 .statusCode(200).extract().response().jsonPath().getString("bookingid");
         return newBookingId;
     }
-
 }

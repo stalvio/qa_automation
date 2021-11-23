@@ -18,12 +18,9 @@ public class SingInPage {
     static By passwordSubmitButton = By.id("enterPasswordConfirmButton");
     static By emailIsNotRegisteredMessage = By.cssSelector("span[data-qaid=error_field]");
 
+    @Step("Check if Sign-in page is open")
     public static boolean isSignInPageOpen() {
         return $(singInPage).isDisplayed();
-    }
-
-    public static void submitPhoneNumber(String phoneNumber) {
-        $(phoneNumber).sendKeys(phoneNumber);
     }
 
     @Step("Login with email address and password")
