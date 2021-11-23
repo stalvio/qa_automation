@@ -61,7 +61,7 @@ public class MainPageTests extends BaseTest {
                 && getLastItemPrice() >= Double.parseDouble(bottomPrice));
     }
 
-    @Test(description = "Verify if any random item from the displayed list can be added in cart",
+    @Test(description = "Verify if any random item from the displayed list can be added to shopping-cart",
             dataProvider = "number-of-items-to-add-data",
             dataProviderClass = TestDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class)
@@ -85,7 +85,7 @@ public class MainPageTests extends BaseTest {
         Assert.assertTrue(isSingleItemPageOpen());
     }
 
-    @Test(description = "Verify if cart contains the added item",
+    @Test(description = "Verify if shopping-cart contains the added item",
             dataProvider = "search-request-items-to-buy-data",
             dataProviderClass = TestDataProvider.class)
     public void cartContainsAddedItem(String request, String itemName) {

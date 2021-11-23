@@ -161,6 +161,86 @@ Expected: The page contains only items wich price is more than 400 and less than
 
 ***
 
- 
+Test-case: userCanAddAnyItemWithinList(Integer randomNumberOfItems)
+Summary: Any item from the displayed list can be added to the shopping-cart 
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field submit the following request "лампы"
+2. Add any number of items in the item-list to the shopping-cart
+
+Expected: 
+- Cart contains the exact number of added items
+
+***
+
+Test-case: userCanNavigateToAnySingleItemPage(String searchRequest) 
+Summary: User can navigate to any single-item page in the list of items
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field submit the following request "лампы"
+2. Click any item-name in the list of items 
+
+Expected: 
+- User is navigated to the single-item page
+
+***
+
+Test-case: cartContainsAddedItem(String request, String itemName)
+Summary: The shopping-cart contains the exact item that was added
+
+Pre-condition:
+- user is on the Main page
+
+Steps:
+1. In the search field submit the following request "лампы"
+2. Add any single item in the list
+3. Open the shopping-cart
+
+Expected: 
+- the shopping-cart contains added item
+
+***
+
+Test-case: userCartContainsSameItemsAfterReLogin()
+Summary: The shopping-cart contains the same user's items after relogin 
+
+Pre-condition:
+- user is not logged
+
+Steps:
+1. Login to the app using valid email/pass credentials
+2. In the search field submit the following request "штора"
+3. Add to the shopping-cart any item from the item-list
+4. Logout from the app
+5. Repeat step #1
+6. Open the shopping-cart
+
+Expected: 
+- the shopping-cart contains only the item added in the 3d step
+
+---------------------------------------------------------------
+
+Single-Item suite
+
+Test-case: itemCanBeAddedInCart()
+Summary: Item can be added to the shopping-cart using 'Купить' button on single-item page 
+
+Pre-condition:
+- user is on random single-item page
+
+Steps:
+1. Click "Купить" button
+2. Open the shopping-cart
+
+Expected: 
+- the shopping-cart contains the added item
+
+
 
 

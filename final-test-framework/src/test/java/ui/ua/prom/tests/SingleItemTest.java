@@ -8,11 +8,11 @@ import static ui.ua.prom.pages.SingleItemPage.*;
 
 public class SingleItemTest extends SingleItemBaseTest {
 
-    @Test
+    @Test(description = "Item can be added to the shopping-cart using 'Купить' button on single-item page")
     public void itemCanBeAddedInCart() {
         String itemName = getItemName();
         addItemInCart();
 
-        Assert.assertEquals(getItemName(), CartPage.getItemNameList().get(0));
+        Assert.assertEquals(itemName, CartPage.getItemNameList().get(0));
     }
 }
