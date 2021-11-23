@@ -13,9 +13,6 @@ import static ui.ua.prom.pages.CartPage.*;
 
 public class MainPage {
 
-
-
-    //Sort-filters
     static By sortByScoreButton = By.cssSelector("span[data-qaid=sort_by_-score]");
     static By sortByLowerPriceButton = By.cssSelector("span[data-qaid=sort_by_price]");
     static By sortByHigherPriceButton = By.cssSelector("span[data-qaid=sort_by_-price]");
@@ -147,6 +144,7 @@ public class MainPage {
         return random.nextInt(listSize);
     }
 
+    @Step("Get listing banner")
     public static SelenideElement getListingBanner() {
         return $(listingBanner);
     }

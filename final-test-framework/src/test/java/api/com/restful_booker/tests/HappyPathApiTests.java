@@ -49,6 +49,7 @@ public class HappyPathApiTests extends BaseTest {
         Assertions.assertNotNull(response.jsonPath().getString("token"));
     }
 
+    @Description("Verify that all the returned, from 'getBookingIds' GET request, ids are valid")
     @Test
     public void getBookingIdsResponseContainsOnlyValidIds() {
 

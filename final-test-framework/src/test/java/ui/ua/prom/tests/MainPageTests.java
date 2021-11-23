@@ -21,14 +21,14 @@ public class MainPageTests extends BaseTest {
     private final User registeredUser = new User("stalvio.neto@gmail.com", "111222");
 
 
-    @Test(dataProvider = "search-field-request-data", dataProviderClass= TestDataProvider.class)
+    @Test(dataProvider = "search-field-request-data", dataProviderClass = TestDataProvider.class)
     public void pickListContainsRelevantItems(String request) {
         SearchField.submitSearchRequest(request);
 
         Assert.assertTrue(isPickListResultsRelevantToRequest(request));
     }
 
-    @Test(dataProvider = "search-field-request-data", dataProviderClass= TestDataProvider.class)
+    @Test(dataProvider = "search-field-request-data", dataProviderClass = TestDataProvider.class)
     public void itemsCanBeSortedByPriceFromLowToHigh(String request) {
         SearchField.submitSearchRequest(request);
         sortItemByLowerPrice();
@@ -36,7 +36,7 @@ public class MainPageTests extends BaseTest {
         Assert.assertTrue(areItemsSortedFromLowerToHigherPrice());
     }
 
-    @Test(dataProvider = "search-field-request-data", dataProviderClass= TestDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "search-field-request-data", dataProviderClass = TestDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void itemsCanBeSortedByPriceFromHighToLow(String request) {
         SearchField.submitSearchRequest(request);
         sortItemByHigherPrice();
@@ -45,20 +45,20 @@ public class MainPageTests extends BaseTest {
     }
 
     @Test(description = "Check if user can filter displayed items by price",
-            dataProvider = "bottom-top-price-data", dataProviderClass= TestDataProvider.class,
+            dataProvider = "bottom-top-price-data", dataProviderClass = TestDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class)
     public void userCanSetPriceRange(String bottomPrice, String topPrice) {
         SearchField.submitSearchRequest("футболк");
         sortItemByHigherPrice();
         submitPriceFilterRange(bottomPrice, topPrice);
 
-        Assert.assertTrue( getFirstItemPrice() <= Double.parseDouble(topPrice)
+        Assert.assertTrue(getFirstItemPrice() <= Double.parseDouble(topPrice)
                 && getLastItemPrice() >= Double.parseDouble(bottomPrice));
     }
 
     @Test(description = "Check if any random item from the displayed list can be added in cart",
             dataProvider = "number-of-items-to-add-data",
-            dataProviderClass= TestDataProvider.class,
+            dataProviderClass = TestDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class)
     public void userCanAddAnyItemWithinList(Integer randomNumberOfItems) {
         SearchField.submitSearchRequest("лампы");
@@ -72,13 +72,13 @@ public class MainPageTests extends BaseTest {
 
     @Test(description = "check if cart contains the added item",
             dataProvider = "search-request-items-to-buy-data",
-            dataProviderClass= TestDataProvider.class)
+            dataProviderClass = TestDataProvider.class)
     public void cartContainsAddedItem(String request, String itemName) {
         SearchField.submitSearchRequest(request);
         addSingleItemByName(itemName);
         List<String> cartItemNames = CartPage.getItemNameList();
 
-        for(String title: cartItemNames) {
+        for (String title : cartItemNames) {
             Assert.assertTrue(title.contains(itemName));
         }
     }
