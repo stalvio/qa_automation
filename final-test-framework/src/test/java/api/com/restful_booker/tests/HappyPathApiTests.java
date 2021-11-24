@@ -68,6 +68,7 @@ public class HappyPathApiTests extends BaseTest {
         }
     }
 
+    @Description("Verify that status code is 200 OK for 'getBooking' GET request using a valid ID")
     @Test
     public void singleBookingCanBeGetById() {
         given()
@@ -78,6 +79,7 @@ public class HappyPathApiTests extends BaseTest {
                 .statusCode(200);
     }
 
+    @Description("Created booking can be received using ID. Booking data is verified")
     @Test
     public void createdBookingCanBeGetById() {
         String newBookingId = createBookingAndGetItsId(bookingToCreate);
@@ -95,6 +97,7 @@ public class HappyPathApiTests extends BaseTest {
         Assertions.assertTrue(bookingToCreate.equals(createdBooking));
     }
 
+    @Description("Existing booking can be fully updated ID using a valid token")
     @Test
     public void bookingCanBeFullyUpdatedWithValidToken() {
 
@@ -112,6 +115,7 @@ public class HappyPathApiTests extends BaseTest {
         Assertions.assertTrue(bookingToUpdate.equals(updatedBooking));
     }
 
+    @Description("Existing booking can be partially updated ID using a valid token")
     @Test
     public void bookingCanBePartiallyUpdatedWithValidToken() {
 
@@ -130,6 +134,7 @@ public class HappyPathApiTests extends BaseTest {
         Assertions.assertTrue(partialBookingToUpdate.equals(partialUpdatedBooking));
     }
 
+    @Description("Existing booking can be deleted ID using a valid token")
     @Test
     public void bookingCanBeDeletedWithValidToken() {
 

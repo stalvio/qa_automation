@@ -3,6 +3,7 @@ package api.com.restful_booker.tests;
 import api.com.restful_booker.models.*;
 import api.com.restful_booker.utils.EndPoints;
 
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ public class SadPathApiTests extends BaseTest {
     private int bookingIdToUpdate = 10;
     private int bookingIdToDelete = 5;
 
+    @Description("Booking can not be created without mandatory keys('firstname' and 'lastname') in body request." +
+            " 500 error is in response")
     @Test
     public void bookingCanNotBeCreatedWithInvalidBody() {
         response = given()
@@ -36,6 +39,7 @@ public class SadPathApiTests extends BaseTest {
         Assertions.assertEquals(internal_server_error_status_code, response.statusCode());
     }
 
+    @Description("Booking can not be deleted with invalid token")
     @Test
     public void bookingCanNotBeDeletedWithInvalidToken() {
         response = getSingleBookingByIdResponse(bookingIdToDelete);
@@ -55,6 +59,7 @@ public class SadPathApiTests extends BaseTest {
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
+    @Description("Booking can not be deleted without token")
     @Test
     public void bookingCanNotBeDeletedWithoutToken() {
         response = getSingleBookingByIdResponse(bookingIdToDelete);
@@ -73,6 +78,7 @@ public class SadPathApiTests extends BaseTest {
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
+    @Description("Booking can not be fully updated with invalid token")
     @Test
     public void bookingCanNotBeUpdatedWithInvalidToken() {
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
@@ -92,6 +98,7 @@ public class SadPathApiTests extends BaseTest {
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
+    @Description("Booking can not be partially updated without token")
     @Test
     public void bookingCanNotBePartlyUpdatedWithoutToken() {
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
