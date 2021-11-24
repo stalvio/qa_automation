@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 
 public class ResponseParser {
 
-    public static BookingDto getBookingObject(Response response) {
+    public static BookingDto parseResponseInToBookingObject(Response response) {
         String jsonString = response.asString();
         Gson g = new Gson();
         return g.fromJson(jsonString, BookingDto.class);

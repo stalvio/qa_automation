@@ -13,7 +13,7 @@ import java.util.List;
 
 import static api.com.restful_booker.utils.ApiTestHelper.createBookingAndGetItsId;
 import static api.com.restful_booker.utils.ApiTestHelper.getSingleBookingByIdResponse;
-import static api.com.restful_booker.utils.ResponseParser.getBookingObject;
+import static api.com.restful_booker.utils.ResponseParser.parseResponseInToBookingObject;
 import static io.restassured.RestAssured.*;
 
 public class HappyPathApiTests extends BaseTest {
@@ -92,7 +92,7 @@ public class HappyPathApiTests extends BaseTest {
                 .statusCode(200)
                 .extract().response();
 
-        BookingDto createdBooking = getBookingObject(response);
+        BookingDto createdBooking = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingToCreate.equals(createdBooking));
     }
@@ -110,7 +110,7 @@ public class HappyPathApiTests extends BaseTest {
                 .then()
                 .statusCode(200)
                 .extract().response();
-        BookingDto updatedBooking = getBookingObject(response);
+        BookingDto updatedBooking = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingToUpdate.equals(updatedBooking));
     }
