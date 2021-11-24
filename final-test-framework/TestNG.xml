@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AllTests">
-    <test name="Api_and_UI_tests">
+    <test name="UI_tests">
         <classes>
-            <class name="api.com.restful_booker.tests.HappyPathApiTests"/>
-            <class name="api.com.restful_booker.tests.SadPathApiTests"/>
             <class name="ui.ua.prom.tests.MainPageTests"/>
             <class name="ui.ua.prom.tests.SingInTest"/>
             <class name="ui.ua.prom.tests.SingleItemTest"/>
+        </classes>
+    </test>
+
+    <test name="API_tests">
+        <classes>
+            <class name="api.com.restful_booker.tests.HappyPathApiTests"/>
+            <class name="api.com.restful_booker.tests.SadPathApiTests"/>
         </classes>
     </test>
 </suite>

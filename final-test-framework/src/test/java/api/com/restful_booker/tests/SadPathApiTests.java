@@ -5,8 +5,8 @@ import api.com.restful_booker.utils.EndPoints;
 
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import static api.com.restful_booker.utils.ApiTestHelper.getSingleBookingByIdResponse;
 import static api.com.restful_booker.utils.ResponseParser.parseResponseInToBookingObject;
@@ -36,7 +36,7 @@ public class SadPathApiTests extends BaseTest {
                 .post(EndPoints.createBooking)
                 .then().extract().response();
 
-        Assertions.assertEquals(internal_server_error_status_code, response.statusCode());
+        Assert.assertEquals(internal_server_error_status_code, response.statusCode());
     }
 
     @Description("Booking can not be deleted with invalid token")
@@ -56,7 +56,7 @@ public class SadPathApiTests extends BaseTest {
         response = getSingleBookingByIdResponse(bookingIdToDelete);
         BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
-        Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
+        Assert.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
     @Description("Booking can not be deleted without token")
@@ -75,7 +75,7 @@ public class SadPathApiTests extends BaseTest {
         response = getSingleBookingByIdResponse(bookingIdToDelete);
         BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
-        Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
+        Assert.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
     @Description("Booking can not be fully updated with invalid token")
@@ -95,7 +95,7 @@ public class SadPathApiTests extends BaseTest {
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
         BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
-        Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
+        Assert.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
     @Description("Booking can not be partially updated without token")
@@ -114,6 +114,6 @@ public class SadPathApiTests extends BaseTest {
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
         BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
-        Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
+        Assert.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 }
