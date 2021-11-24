@@ -70,7 +70,7 @@ public class HappyPathApiTests extends BaseTest {
     @Description("Verify that status code is 200 OK for 'getBooking' GET request using a valid ID")
     @Test
     public void singleBookingCanBeGetById() {
-        given().log().all()
+        given()
                 .pathParam("id", "1")
                 .when()
                 .get(EndPoints.getBooking)
