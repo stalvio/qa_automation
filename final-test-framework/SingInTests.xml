@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AllTests">
-    <test name="Test">
+    <test name="UI_tests">
         <classes>
-            <class name="final-test-framework.MainPageTests"/>
             <class name="ui.ua.prom.tests.SingInTest"/>
-            <class name="api.com.restful_booker.tests.HappyPathApiTests"/>
         </classes>
-    </test> <!-- Test -->
-</suite> <!-- Suite -->
+    </test>
+</suite>
