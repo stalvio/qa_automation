@@ -6,8 +6,8 @@ import api.com.restful_booker.utils.ResponseParser;
 import api.com.restful_booker.utils.TokenGenerator;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -23,7 +23,6 @@ public class HappyPathApiTests extends BaseTest {
     private static final String valid_password = "password123";
     private static final int ok_status_code = 200;
     private static final int not_found_status_code = 404;
-    private static final String invalidToken = "invalidToken!007";
 
     private BookingDto bookingToCreate = new BookingDto("Stalvio", "Neto", 333, true,
             new BookingDates("2020-01-01", "2021-01-01"),
@@ -32,7 +31,7 @@ public class HappyPathApiTests extends BaseTest {
             new BookingDates("2020-01-01", "2021-01-01"), "Super");
     private int bookingIdToUpdate = 10;
     private PartialBookingDto partialBookingToUpdate = new PartialBookingDto("Jayden", "Molse");
-    private int bookingIdToDelete = 5;
+    private int bookingIdToDelete = 1;
 
 
     @Description("SingUp is successful with valid credential and the token is returned")
@@ -46,7 +45,7 @@ public class HappyPathApiTests extends BaseTest {
                 .then()
                 .statusCode(200).extract().response();
 
-        Assertions.assertNotNull(response.jsonPath().getString("token"));
+        Assert.assertNotNull(response.jsonPath().getString("token"));
     }
 
     @Description("Verify that all the returned, from 'getBookingIds' GET request, ids are valid")
@@ -64,14 +63,14 @@ public class HappyPathApiTests extends BaseTest {
         List<Number> bookingIds = response.jsonPath().getList("bookingid");
 
         for (Number id : bookingIds) {
-            Assertions.assertEquals(ok_status_code, getSingleBookingByIdResponse(id).statusCode());
+            Assert.assertEquals(ok_status_code, getSingleBookingByIdResponse(id).statusCode());
         }
     }
 
     @Description("Verify that status code is 200 OK for 'getBooking' GET request using a valid ID")
     @Test
     public void singleBookingCanBeGetById() {
-        given()
+        given().log().all()
                 .pathParam("id", "1")
                 .when()
                 .get(EndPoints.getBooking)
@@ -94,7 +93,7 @@ public class HappyPathApiTests extends BaseTest {
 
         BookingDto createdBooking = parseResponseInToBookingObject(response);
 
-        Assertions.assertTrue(bookingToCreate.equals(createdBooking));
+        Assert.assertTrue(bookingToCreate.equals(createdBooking));
     }
 
     @Description("Existing booking can be fully updated ID using a valid token")
@@ -112,7 +111,7 @@ public class HappyPathApiTests extends BaseTest {
                 .extract().response();
         BookingDto updatedBooking = parseResponseInToBookingObject(response);
 
-        Assertions.assertTrue(bookingToUpdate.equals(updatedBooking));
+        Assert.assertTrue(bookingToUpdate.equals(updatedBooking));
     }
 
     @Description("Existing booking can be partially updated ID using a valid token")
@@ -131,11 +130,11 @@ public class HappyPathApiTests extends BaseTest {
 
         PartialBookingDto partialUpdatedBooking = ResponseParser.getPartialBookingObject(response);
 
-        Assertions.assertTrue(partialBookingToUpdate.equals(partialUpdatedBooking));
+        Assert.assertTrue(partialBookingToUpdate.equals(partialUpdatedBooking));
     }
 
     @Description("Existing booking can be deleted ID using a valid token")
-    @Test
+    @Test(dependsOnMethods={"allBookingIdsInResponseAreValid"})
     public void bookingCanBeDeletedWithValidToken() {
 
         given()
@@ -146,6 +145,6 @@ public class HappyPathApiTests extends BaseTest {
                 .then()
                 .statusCode(201);
 
-        Assertions.assertEquals(not_found_status_code, getSingleBookingByIdResponse(bookingIdToDelete).statusCode());
+        Assert.assertEquals(not_found_status_code, getSingleBookingByIdResponse(bookingIdToDelete).statusCode());
     }
 }

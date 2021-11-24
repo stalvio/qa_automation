@@ -2,14 +2,13 @@ package api.com.restful_booker.tests;
 
 import api.com.restful_booker.utils.EndPoints;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.testng.annotations.*;
 
 import static io.restassured.RestAssured.*;
 
 public class BaseTest {
 
-    @BeforeAll
+    @BeforeSuite
     public static void setup() {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com";
         RestAssured.requestSpecification = given().contentType("application/json");
@@ -17,7 +16,7 @@ public class BaseTest {
                 .accept("application/json");
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void healthCheck() {
         given().log().all()
                 .when()
