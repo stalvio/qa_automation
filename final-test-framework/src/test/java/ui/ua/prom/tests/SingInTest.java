@@ -27,7 +27,7 @@ public class SingInTest extends SingInBaseTest {
         Assert.assertTrue(isSignInPageOpen());
     }
 
-    @Test(description = "User is logged when using valid email and password")
+    @Test(description = "User can sing-in using valid email and password")
     @Severity(SeverityLevel.CRITICAL)
     public void registeredUserCanSingIn() {
         singInWithEmail(registeredUser);
@@ -35,23 +35,23 @@ public class SingInTest extends SingInBaseTest {
         Assert.assertTrue(isUserLogged());
     }
 
-    @Test(description = "User is not logged when using unregistered email")
-    public void unRegisteredUserCanNotSingIn () {
+    @Test(description = "User can't sing-in using unregistered email")
+    public void unRegisteredUserCanNotSingIn() {
         clickEmailButton();
         submitEmail(unRegisteredUser.getEmail());
 
         Assert.assertEquals(ErrorText.EMAIL_NOT_REGISTERED.message, getEmailErrorMessage());
     }
 
-    @Test(description = "User is not logged when using valid email and invalid password")
+    @Test(description = "User can not sing-in using valid email with invalid password")
     public void noSingInWithInvalidPassword() {
         singInWithEmail(userWithInvalidPassword);
 
         Assert.assertEquals(ErrorText.WRONG_USER_CREDENTIALS.message, getEmailErrorMessage());
     }
 
-    @Test(description = "User is not logged when using invalid email format")
-    public void noSingInWithInvalidEmailFormat () {
+    @Test(description = "User can't sing-in when using invalid email format")
+    public void noSingInWithInvalidEmailFormat() {
         clickEmailButton();
         submitEmail(userWithInvalidEmailFormat.getEmail());
 

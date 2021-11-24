@@ -5,12 +5,9 @@ import api.com.restful_booker.models.PartialBookingDto;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 
-import java.lang.reflect.Type;
-
 public class ResponseParser {
 
-
-    public static BookingDto getBookingObject(Response response) {
+    public static BookingDto parseResponseInToBookingObject(Response response) {
         String jsonString = response.asString();
         Gson g = new Gson();
         return g.fromJson(jsonString, BookingDto.class);

@@ -13,7 +13,7 @@ import java.util.List;
 
 import static api.com.restful_booker.utils.ApiTestHelper.createBookingAndGetItsId;
 import static api.com.restful_booker.utils.ApiTestHelper.getSingleBookingByIdResponse;
-import static api.com.restful_booker.utils.ResponseParser.getBookingObject;
+import static api.com.restful_booker.utils.ResponseParser.parseResponseInToBookingObject;
 import static io.restassured.RestAssured.*;
 
 public class HappyPathApiTests extends BaseTest {
@@ -51,7 +51,7 @@ public class HappyPathApiTests extends BaseTest {
 
     @Description("Verify that all the returned, from 'getBookingIds' GET request, ids are valid")
     @Test
-    public void getBookingIdsResponseContainsOnlyValidIds() {
+    public void allBookingIdsInResponseAreValid() {
 
          response = given().
                 when().
@@ -68,6 +68,7 @@ public class HappyPathApiTests extends BaseTest {
         }
     }
 
+    @Description("Verify that status code is 200 OK for 'getBooking' GET request using a valid ID")
     @Test
     public void singleBookingCanBeGetById() {
         given()
@@ -78,6 +79,7 @@ public class HappyPathApiTests extends BaseTest {
                 .statusCode(200);
     }
 
+    @Description("Created booking can be received using ID. Booking data is verified")
     @Test
     public void createdBookingCanBeGetById() {
         String newBookingId = createBookingAndGetItsId(bookingToCreate);
@@ -90,11 +92,12 @@ public class HappyPathApiTests extends BaseTest {
                 .statusCode(200)
                 .extract().response();
 
-        BookingDto createdBooking = getBookingObject(response);
+        BookingDto createdBooking = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingToCreate.equals(createdBooking));
     }
 
+    @Description("Existing booking can be fully updated ID using a valid token")
     @Test
     public void bookingCanBeFullyUpdatedWithValidToken() {
 
@@ -107,11 +110,12 @@ public class HappyPathApiTests extends BaseTest {
                 .then()
                 .statusCode(200)
                 .extract().response();
-        BookingDto updatedBooking = getBookingObject(response);
+        BookingDto updatedBooking = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingToUpdate.equals(updatedBooking));
     }
 
+    @Description("Existing booking can be partially updated ID using a valid token")
     @Test
     public void bookingCanBePartiallyUpdatedWithValidToken() {
 
@@ -130,6 +134,7 @@ public class HappyPathApiTests extends BaseTest {
         Assertions.assertTrue(partialBookingToUpdate.equals(partialUpdatedBooking));
     }
 
+    @Description("Existing booking can be deleted ID using a valid token")
     @Test
     public void bookingCanBeDeletedWithValidToken() {
 

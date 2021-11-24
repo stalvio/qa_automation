@@ -3,12 +3,13 @@ package api.com.restful_booker.tests;
 import api.com.restful_booker.models.*;
 import api.com.restful_booker.utils.EndPoints;
 
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static api.com.restful_booker.utils.ApiTestHelper.getSingleBookingByIdResponse;
-import static api.com.restful_booker.utils.ResponseParser.getBookingObject;
+import static api.com.restful_booker.utils.ResponseParser.parseResponseInToBookingObject;
 import static io.restassured.RestAssured.*;
 
 public class SadPathApiTests extends BaseTest {
@@ -24,6 +25,8 @@ public class SadPathApiTests extends BaseTest {
     private int bookingIdToUpdate = 10;
     private int bookingIdToDelete = 5;
 
+    @Description("Booking can not be created without mandatory keys('firstname' and 'lastname') in body request." +
+            " 500 error is in response")
     @Test
     public void bookingCanNotBeCreatedWithInvalidBody() {
         response = given()
@@ -36,10 +39,11 @@ public class SadPathApiTests extends BaseTest {
         Assertions.assertEquals(internal_server_error_status_code, response.statusCode());
     }
 
+    @Description("Booking can not be deleted with invalid token")
     @Test
     public void bookingCanNotBeDeletedWithInvalidToken() {
         response = getSingleBookingByIdResponse(bookingIdToDelete);
-        BookingDto bookingDtoBefore = getBookingObject(response);
+        BookingDto bookingDtoBefore = parseResponseInToBookingObject(response);
 
         given()
                 .header("Cookie", "token=" + invalidToken)
@@ -50,15 +54,16 @@ public class SadPathApiTests extends BaseTest {
                 .statusCode(403);
 
         response = getSingleBookingByIdResponse(bookingIdToDelete);
-        BookingDto bookingDtoAfter = getBookingObject(response);
+        BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
+    @Description("Booking can not be deleted without token")
     @Test
     public void bookingCanNotBeDeletedWithoutToken() {
         response = getSingleBookingByIdResponse(bookingIdToDelete);
-        BookingDto bookingDtoBefore = getBookingObject(response);
+        BookingDto bookingDtoBefore = parseResponseInToBookingObject(response);
 
         given()
                 .pathParam("id", bookingIdToDelete)
@@ -68,15 +73,16 @@ public class SadPathApiTests extends BaseTest {
                 .statusCode(403);
 
         response = getSingleBookingByIdResponse(bookingIdToDelete);
-        BookingDto bookingDtoAfter = getBookingObject(response);
+        BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
+    @Description("Booking can not be fully updated with invalid token")
     @Test
     public void bookingCanNotBeUpdatedWithInvalidToken() {
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
-        BookingDto bookingDtoBefore = getBookingObject(response);
+        BookingDto bookingDtoBefore = parseResponseInToBookingObject(response);
 
         given()
                 .header("Cookie", "token=" + invalidToken)
@@ -87,15 +93,16 @@ public class SadPathApiTests extends BaseTest {
                 .statusCode(403);
 
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
-        BookingDto bookingDtoAfter = getBookingObject(response);
+        BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
 
+    @Description("Booking can not be partially updated without token")
     @Test
     public void bookingCanNotBePartlyUpdatedWithoutToken() {
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
-        BookingDto bookingDtoBefore = getBookingObject(response);
+        BookingDto bookingDtoBefore = parseResponseInToBookingObject(response);
 
         given()
                 .pathParam("id", bookingIdToUpdate)
@@ -105,7 +112,7 @@ public class SadPathApiTests extends BaseTest {
                 .statusCode(403);
 
         response = getSingleBookingByIdResponse(bookingIdToUpdate);
-        BookingDto bookingDtoAfter = getBookingObject(response);
+        BookingDto bookingDtoAfter = parseResponseInToBookingObject(response);
 
         Assertions.assertTrue(bookingDtoBefore.equals(bookingDtoAfter));
     }
