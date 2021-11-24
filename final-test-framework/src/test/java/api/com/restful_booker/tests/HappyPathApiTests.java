@@ -31,7 +31,7 @@ public class HappyPathApiTests extends BaseTest {
             new BookingDates("2020-01-01", "2021-01-01"), "Super");
     private int bookingIdToUpdate = 10;
     private PartialBookingDto partialBookingToUpdate = new PartialBookingDto("Jayden", "Molse");
-    private int bookingIdToDelete = 1;
+    private int bookingIdToDelete = 11;
 
 
     @Description("SingUp is successful with valid credential and the token is returned")
