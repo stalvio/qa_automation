@@ -50,8 +50,7 @@ public class MainPageTests extends BaseTest {
     }
 
     @Test(description = "Verify if user can filter displayed items by price",
-            dataProvider = "bottom-top-price-data", dataProviderClass = TestDataProvider.class,
-            retryAnalyzer = RetryAnalyzer.class)
+            dataProvider = "bottom-top-price-data", dataProviderClass = TestDataProvider.class)
     public void userCanSetPriceRange(String bottomPrice, String topPrice) {
         SearchField.submitSearchRequest(tShirtRequest);
         sortItemByHigherPrice();
