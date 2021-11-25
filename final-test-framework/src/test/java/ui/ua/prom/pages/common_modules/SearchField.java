@@ -13,10 +13,11 @@ import static ui.ua.prom.pages.MainPage.*;
 public class SearchField {
 
     static By searchField = By.cssSelector("input._3tZPe");
+    static By pickList = By.cssSelector("._1KcTA._2q9cL._3v4OG._1BvwO._3iCbA");
     static By itemsPickList = By.cssSelector("._1KcTA._2-LvQ");
     static By submitButton = By.cssSelector(".VspXp._2Nito._3dQ3K._1eW42._3z4MG._3gvGh._2jLre._39p0b.B0CZe._29wUy");
 
-    static By searchResults = By.cssSelector("._1NEkz ._1tCLn");
+    static By searchResults = By.cssSelector("._1NEkz._1tCLn");
     static By popularPickListItems = By.cssSelector("a[data-qaid=popular]");
 
     @Step("Open search tool pick-list")
@@ -28,6 +29,7 @@ public class SearchField {
     @Step("User types a '{request}' in search field")
     public static void typeSearchRequest(String request) {
         $(searchField).should(Condition.visible).sendKeys(request);
+        $(pickList).shouldBe(Condition.visible);
         $(submitButton).should(Condition.enabled);
     }
 

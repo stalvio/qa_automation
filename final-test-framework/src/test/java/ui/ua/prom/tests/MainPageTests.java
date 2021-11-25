@@ -26,7 +26,7 @@ public class MainPageTests extends BaseTest {
     @Test(description = "Search field's pick-list contains relevant to the request search results",
             dataProvider = "search-field-request-data", dataProviderClass = TestDataProvider.class)
     public void pickListContainsRelevantItems(String request) {
-        SearchField.submitSearchRequest(request);
+        SearchField.typeSearchRequest(request);
 
         Assert.assertTrue(isPickListResultsRelevantToRequest(request));
     }
@@ -41,7 +41,7 @@ public class MainPageTests extends BaseTest {
     }
 
     @Test(description = "Searched items can be sorted by price from higher to lower",
-            dataProvider = "search-field-request-data", dataProviderClass = TestDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+            dataProvider = "search-field-request-data", dataProviderClass = TestDataProvider.class)
     public void itemsCanBeSortedByPriceFromHighToLow(String request) {
         SearchField.submitSearchRequest(request);
         sortItemByHigherPrice();
@@ -101,7 +101,7 @@ public class MainPageTests extends BaseTest {
     @Test(description = "Verify if cart contains the same item after logout and the following login")
     public void userCartContainsSameItemsAfterReLogin() {
         logInWithEmail(registeredUser);
-        findAndAddFirstItemByName("штора");
+        findAndAddFirstItemByName("adapter");
         List<String> userCartBeforeLogOut = CartPage.getItemNameList();
 
         logOut();
